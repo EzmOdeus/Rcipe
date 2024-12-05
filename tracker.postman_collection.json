@@ -37,22 +37,6 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000"
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "egister",
 			"request": {
 				"method": "POST",
@@ -168,7 +152,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDhmNDg2NTJlZWFlZjA1NzVmNWI0NyIsImlhdCI6MTczMjgzNDU3NywiZXhwIjoxNzMyODM4MTc3fQ.rIufhJdJ_f99uTXZ6OP55pRhkX-KsOTRUILMkmzRfuU",
+							"value": "{{token}}",
 							"type": "string"
 						}
 					]
