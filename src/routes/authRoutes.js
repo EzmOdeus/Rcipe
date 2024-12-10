@@ -1,37 +1,21 @@
 const express = require("express");
-const router = express.Router();
-const { register, login } = require("../controllers/authController");
 const passport = require("passport");
+const router = express.Router();
 
-
-// بدء تسجيل الدخول باستخدام Google
+// بدء عملية تسجيل الدخول باستخدام Google
 router.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-// إعادة التوجيه من Google بعد تسجيل الدخول
+// Google callback
 router.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login-failed" }),
+  passport.authenticate("google", { session: false }),
   (req, res) => {
-    res.redirect("/"); // إعادة التوجيه بعد النجاح
+    const { user, token } = req.user;
+    res.json({ message: "Login successful", user, token });
   }
 );
-
-// تسجيل الخروج
-router.get("/logout", (req, res) => {
-  req.logout((err) => {
-    if (err) {
-      return res.status(500).json({ message: "Error logging out" });
-    }
-    res.redirect("/");
-  });
-});
-
-
-
-router.post("/register", register);
-router.post("/login", login);
 
 module.exports = router;

@@ -8,7 +8,8 @@ const {
 const authenticate = require("../middleware/authMiddleware");
 // Routes
 router.post("/", authenticate, createFood); // إضافة طعام جديد
-router.get("/", authenticate, getFoods); // جلب قائمة الأطعمة
+router.get("/", protect, getFoods); // جلب قائمة الأطعمة
 router.delete("/:id", deleteFood); // حذف طعام
+router.post("/add", protect, addFood);
 
 module.exports = router;

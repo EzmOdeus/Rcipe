@@ -1,16 +1,29 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
 
-const authenticate = (req, res, next) => {
-  const token = req.header("Authorization")?.split(" ")[1];
-  if (!token) return res.status(401).json({ message: "Access Denied" });
+const protect = async (req, res, next) => {
+  let token;
 
-  try {
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = verified;
-    next();
-  } catch (error) {
-    res.status(400).json({ message: "Invalid Token" });
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    try {
+      token = req.headers.authorization.split(" ")[1]; // استخراج التوكن
+
+      // التحقق من التوكن وفك تشفيره
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      // البحث عن المستخدم وتخزينه في الطلب
+      req.user = await User.findById(decoded.id).select("-password");
+      next();
+    } catch (err) {
+      console.error(err);
+      res.status(401).json({ message: "Not authorized, token failed" });
+    }
+  } else {
+    res.status(401).json({ message: "Not authorized, no token" });
   }
 };
 
-module.exports = authenticate;
+module.exports = { protect };
