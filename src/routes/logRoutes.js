@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { getDailyLog } = require("../controllers/logController");
-const authenticate = require("../middleware/authMiddleware");
+const {protect} = require("../middleware/authMiddleware");
 
-router.get("/daily", authenticate, getDailyLog); // جلب السجل اليومي
+router.get("/daily", protect, getDailyLog); // جلب السجل اليومي
 
 module.exports = router;

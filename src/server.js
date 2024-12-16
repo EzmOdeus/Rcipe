@@ -5,8 +5,10 @@ const morgan = require("morgan");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const foodRoutes = require("./routes/foodRoutes");
+const mealRoutes = require("./routes/mealRoutes");
 const goalRoutes = require("./routes/goalRoutes");
 const statsRoutes = require("./routes/statsRoutes");
+const LogRoutes = require("./routes/logRoutes");
 
 // Load environment variables
 dotenv.config();
@@ -30,8 +32,10 @@ app.get("/", (req, res) => {
 });
 app.use("/api/users", userRoutes);
 app.use("/api/food", foodRoutes);
+app.use("/api/meals", mealRoutes);
 app.use("/api/goals", goalRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/log", LogRoutes);
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.message);
