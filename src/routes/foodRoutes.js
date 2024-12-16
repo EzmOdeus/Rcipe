@@ -5,11 +5,11 @@ const {
   getFoods,
   deleteFood,
 } = require("../controllers/foodController");
-const authenticate = require("../middleware/authMiddleware");
+const { protect } = require("../middleware/authMiddleware");
 // Routes
-router.post("/", authenticate, createFood); // إضافة طعام جديد
+router.post("/", protect, createFood); // إضافة طعام جديد
 router.get("/", protect, getFoods); // جلب قائمة الأطعمة
-router.delete("/:id", deleteFood); // حذف طعام
-router.post("/add", protect, addFood);
+router.delete("/:id", protect, deleteFood); // حذف طعام
+
 
 module.exports = router;

@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, age, weight, height } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json({ message: "Please provide all fields" });
@@ -15,7 +15,14 @@ const registerUser = async (req, res) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await User.create({ name, email, password: hashedPassword });
+  const user = await User.create({
+    name,
+    email,
+    password: hashedPassword,
+    age,
+    weight,
+    height,
+  });
 
   res.status(201).json({ message: "User registered successfully", user });
 };
@@ -28,7 +35,7 @@ const loginUser = async (req, res) => {
     return res.status(400).json({ message: "Invalid credentials" });
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = bcrypt.compare(password, user.password);
   if (!isMatch) {
     return res.status(400).json({ message: "Invalid credentials" });
   }
@@ -36,7 +43,7 @@ const loginUser = async (req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "1d",
   });
-  res.json({ token });
+  res.json({ token ,user});
 };
 const getUserProfile = async (req, res) => {
   if (!req.user) {
@@ -46,4 +53,3 @@ const getUserProfile = async (req, res) => {
 };
 
 module.exports = { registerUser, loginUser, getUserProfile };
-
