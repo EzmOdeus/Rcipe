@@ -11,6 +11,16 @@ exports.createFood = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+exports.createFoods = async (req, res) => {
+  try {
+   const food= Food.insertMany(req.body)
+    
+    res.status(201).json({ message: "Food added successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 // جلب قائمة الأطعمة
 exports.getFoods = async (req, res) => {
