@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n \"email\": \"user@example.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+					"raw": "{\r\n    \"name\":\"seyasm12233\",\r\n  \"email\": \"usesr12233@example.com\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/auth/login",
+					"raw": "http://localhost:5000/api/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -29,7 +29,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"auth",
+						"users",
 						"login"
 					]
 				}
@@ -43,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"seyam\",\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+					"raw": "{\r\n    \"name\":\"seyasm12233\",\r\n  \"email\": \"usesr12233@example.com\",\r\n  \"password\": \"password123\",\r\n  \"height\":\"178\",\r\n  \"age\":\"21\",\r\n  \"weight\":\"80\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -51,7 +51,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/auth/register",
+					"raw": "http://localhost:5000/api/users/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -59,7 +59,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"auth",
+						"users",
 						"register"
 					]
 				}
@@ -83,7 +83,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Apple\",\r\n  \"category\": \"Snacks\",\r\n  \"calories\": 95,\r\n  \"createdBy\": \"6748f48652eeaef0575f5b47\"\r\n}\r\n",
+					"raw": "{\r\n  \"name\": \"Apple\",\r\n  \"category\": \"Snacks\",\r\n  \"calories\": 95,\r\n  \"createdBy\": \"67608358fd11dfe9efc52822\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -91,7 +91,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/foods",
+					"raw": "http://localhost:5000/api/food",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -99,7 +99,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"foods"
+						"food"
 					]
 				}
 			},
@@ -122,7 +122,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"user\": \"6748f48652eeaef0575f5b47\",\r\n  \"foods\": [\"6748f5d76476775db1dd246e\", \"6748f5d76476775db1dd246e\"],\r\n  \"totalCalories\": 100\r\n}\r\n",
+					"raw": "{\r\n  \"user\": \"67518d7ef8a379b23430f5a8\",\r\n  \"foods\": [\"6748f5d76476775db1dd246e\", \"6748f5d76476775db1dd246e\"],\r\n  \"totalCalories\": 100\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -130,12 +130,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/meals",
-					"protocol": "http",
+					"raw": "{{BaseUrl}}/api/meals",
 					"host": [
-						"localhost"
+						"{{BaseUrl}}"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"meals"
@@ -169,6 +167,166 @@
 					"path": [
 						"api",
 						"logs",
+						"daily"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "food",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/food",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"food"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "goals/set",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"caloriesGoal\": 5000\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/goals/set",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"goals",
+						"set"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "goals",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/goals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"goals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stats/weekly",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/stats/weekly",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"stats",
+						"weekly"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "log/daily",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/log/daily",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"log",
 						"daily"
 					]
 				}

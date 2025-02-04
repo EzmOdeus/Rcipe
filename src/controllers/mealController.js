@@ -3,8 +3,14 @@ const Meal = require("../models/Meal");
 // إضافة وجبة جديدة
 exports.createMeal = async (req, res) => {
   try {
-    const { user, foods, totalCalories } = req.body;
-    const meal = new Meal({ user, foods, totalCalories });
+    const { user, foods, totalCalories, protein, carbohydrate } = req.body;
+    const meal = new Meal({
+      user,
+      foods,
+      totalCalories,
+      protein,
+      carbohydrate,
+    });
     await meal.save();
     res.status(201).json({ message: "Meal added successfully", meal });
   } catch (error) {
