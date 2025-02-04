@@ -5,6 +5,7 @@ const {
   createFoods,
 
   getFoods,
+    createFoods,
   deleteFood,
 } = require("../controllers/foodController");
 const { protect } = require("../middleware/authMiddleware");
