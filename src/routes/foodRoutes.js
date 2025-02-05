@@ -2,10 +2,8 @@ const express = require("express");
 const router = express.Router();
 const {
   createFood,
-  createFoods,
-
   getFoods,
-    createFoods,
+  createFoods,
   deleteFood,
 } = require("../controllers/foodController");
 const { protect } = require("../middleware/authMiddleware");
