@@ -143,6 +143,7 @@ const loginUser = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+user
         token,
       });
     } else {
